@@ -7,6 +7,9 @@
     <title>Document</title>
 
     <link rel="stylesheet" href="css/style.css">
+    <script src="/js/script.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 </head>
 <body>
     <section id="mainID">
@@ -14,39 +17,77 @@
             <header>
                 <p style="font-size: 3em; text-align: center; color: white;">Shortest Job First Non-Preemptive</p>
             </header>
-
-            <aside>
-                <form class="main-form" action="" method>
-                    <input type="text" class="form-control" name="job" placeholder="Job">
-                    <input type="text" class="form-control" name="arrival" placeholder="Arrival Time">
-                    <input type="text" class="form-control" name="burst" placeholder="Burst Time">
-                </form>
-                
-            </aside>
-
+                <aside>
+                    <form class="main-form" action="" method>
+                        <input id="job" type="text" class="form-control" name="job" placeholder="Job" disabled>
+                        <input id="arrival" type="text" class="form-control" name="arrival" placeholder="Arrival Time" required>
+                        <input id="burst" type="text" class="form-control" name="burst" placeholder="Burst Time" required>
+                    </form>
+                </aside>
             <div>
-                <input type="submit" name="submit" id="insert" placeholder="SUBMIT" value="" onclick="logUpdate();">
+                <input type="submit" name="submit" id="insert" placeholder="SUBMIT" value="" onclick="logUpdate();" >
             </div>
-
-           <br><br><br>
-
+                <br><br><br>
             <main>
                 <form method="POST">
-                    <table>
-                        <tr>
-                            <th>Job</th>
-                            <th>Arrival Time</th>
-                            <th>Burst Time</th>
-                            <th>Waiting Time</th>
-                            <th>Finish Time</th>
-                        </tr>
+                    <table id="job-table">
+                        <thead>
+                            <tr>
+                                <th>Job</th>
+                                <th>Arrival Time</th>
+                                <th>Burst Time</th>
+                                <th>Waiting Time</th>
+                                <th>Finish Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
                     </table> 
                 </form>  
             </main>
-
-
-
         </div>
     </section>
+
+    <script>
+       var initialvalue = 1;
+       var content= [];
+       var table = $('#job-table');
+
+       table.find("tbody tr").remove();
+       
+       // GET DATA FROM TEXTFIELDS AND STORE IN ARRAY
+       var logUpdate = function (){
+        
+            var job = $('#job').val();
+            var arrival = $('#arrival').val();
+            var burst = $('#burst').val();
+            reloadTable(job, arrival, burst);
+
+            
+       } 
+       // CLICK TO STORE GOT DATA FROM TEXTFIELDS
+       var reloadTable = function(job, arrival, burst) {
+          table.append("<tr><td>" + initialvalue + "</td><td>" + arrival + "</td><td>" + burst + "</td></tr>");
+
+                
+            content.push({
+
+                'jobID': job,
+                'aTime': arrival,
+                'bTime': burst
+            });
+            initialvalue++;
+            $('#jobID').val(initialvalue);
+
+            // console.log(content);
+        };
+
+       
+
+        
+    </script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 </body>
 </html>
