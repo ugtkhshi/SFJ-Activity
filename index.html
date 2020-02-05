@@ -18,16 +18,18 @@
                 <p style="font-size: 3em; text-align: center; color: white;">Shortest Job First Non-Preemptive</p>
             </header>
                 <aside>
-                    <form class="main-form" action="" method>
-                        <input id="job" type="text" class="form-control" name="job" placeholder="Job" disabled>
-                        <input id="arrival" type="text" class="form-control" name="arrival" placeholder="Arrival Time" required>
-                        <input id="burst" type="text" class="form-control" name="burst" placeholder="Burst Time" required>
-                    </form>
+                    <div>
+                        <form class="mainForm" action="" onsubmit="returnvalidateform()" method>
+                            <input id="job" type="number" class="form-control" name="job" placeholder="Job" disabled>
+                            <input id="arrival" type="number" class="form-control" name="arrival" placeholder="Arrival Time" required="">
+                            <input id="burst" type="number" class="form-control" name="burst" placeholder="Burst Time" required="">
+                        </form>
+                
+                   
+                        <input type="submit" name="submit" id="insert" value="SUBMIT" onclick="logUpdate();" >
+                    </div>
                 </aside>
-            <div>
-                <input type="submit" name="submit" id="insert" placeholder="SUBMIT" value="" onclick="logUpdate();" >
-            </div>
-                <br><br><br>
+                <br>
             <main>
                 <form method="POST">
                     <table id="job-table">
@@ -54,7 +56,9 @@
        var table = $('#job-table');
 
        table.find("tbody tr").remove();
-       
+
+ 
+
        // GET DATA FROM TEXTFIELDS AND STORE IN ARRAY
        var logUpdate = function (){
         
@@ -63,13 +67,17 @@
             var burst = $('#burst').val();
             reloadTable(job, arrival, burst);
 
-            
        } 
+      
+
+
+
        // CLICK TO STORE GOT DATA FROM TEXTFIELDS
        var reloadTable = function(job, arrival, burst) {
+           if !validateForm(){
+
           table.append("<tr><td>" + initialvalue + "</td><td>" + arrival + "</td><td>" + burst + "</td></tr>");
 
-                
             content.push({
 
                 'jobID': job,
@@ -78,12 +86,17 @@
             });
             initialvalue++;
             $('#jobID').val(initialvalue);
+            }
+        }
+            function ClearFields() {
+                document.getElementById("arrival").value = "";
+                document.getElementById("burst").value = "";           
+            };
+            }
 
-            // console.log(content);
-        };
-
-       
-
+        var form = document.getElementById(main-form).reset();
+    
+        
         
     </script>
 
